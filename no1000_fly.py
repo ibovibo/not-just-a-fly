@@ -46,18 +46,31 @@ def sinek(geri_bildirim):
     return sinek_tercih
 
 
-tum_sinekler = []
+ogrenen_sinekler = []
+ogrenmeyen_sinekler = []
 
-for i in range(100):
-    tum_sinekler.append(sinek())
+for i in range(1000):
+    ogrenen_sinekler.append(sinek(geri_bildirim=True))
+    ogrenmeyen_sinekler.append(sinek(geri_bildirim=False))
    
 
 
-tablo = np.array(tum_sinekler)
-print(tablo.shape)
-print(tablo.mean(axis = 0))
+tablo_ogrenen = np.array(ogrenen_sinekler)
+print(tablo_ogrenen.shape)
+ort_ogrenen = tablo_ogrenen.mean(axis = 0)
+print(ort_ogrenen)
 
-plt.plot()
+tablo_ogrenmeyen = np.array(ogrenmeyen_sinekler)
+print(tablo_ogrenmeyen.shape)
+ort_ogrenmeyen = tablo_ogrenmeyen.mean(axis = 0)
+print(ort_ogrenmeyen)
+
+plt.plot(ort_ogrenen, label = "ort ogrenen")
+plt.plot(ort_ogrenmeyen, label = "ort ogrenmeyen")
+
+plt.xlabel("deneme")
+plt.ylabel("ayrilma orani")
+
 plt.title("sinek tercih")
 plt.legend()
 plt.show()
